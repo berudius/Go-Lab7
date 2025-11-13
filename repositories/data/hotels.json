@@ -1,0 +1,56 @@
+[
+  {
+    "ID": "74c546cc-c266-4436-8ddc-0fd09a4671fe",
+    "Name": "Luxury Mountain Resort",
+    "Rooms": [
+      {
+        "ID": "",
+        "RoomType": "Suite",
+        "Price": 350,
+        "Facilities": [
+          "Minibar",
+          "Balcony"
+        ]
+      },
+      {
+        "ID": "",
+        "RoomType": "Standard",
+        "Price": 150,
+        "Facilities": [
+          "WiFi"
+        ]
+      },
+      {
+        "ID": "",
+        "RoomType": "Luxury",
+        "Price": 150,
+        "Facilities": [
+          "WiFi"
+        ]
+      }
+    ]
+  },
+  {
+    "ID": "a2296c12-bb00-40a3-8f02-bff88785fe3e",
+    "Name": "Edemium",
+    "Rooms": [
+      {
+        "ID": "",
+        "RoomType": "Suite",
+        "Price": 350,
+        "Facilities": [
+          "Minibar",
+          "Balcony"
+        ]
+      },
+      {
+        "ID": "",
+        "RoomType": "Standard",
+        "Price": 150,
+        "Facilities": [
+          "WiFi"
+        ]
+      }
+    ]
+  }
+]

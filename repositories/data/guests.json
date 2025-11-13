@@ -1,0 +1,20 @@
+[
+  {
+    "ID": "1acb3e72-c242-4254-adf6-608db7f03843",
+    "Name": "Alex K.",
+    "MobileNumber": "380501234567",
+    "Preferences": [
+      "Feather pillows",
+      "Quiet room"
+    ]
+  },
+  {
+    "ID": "63419e91-18f0-4128-95ff-3b03733f3ea6",
+    "Name": "Elena O.",
+    "MobileNumber": "380501234967",
+    "Preferences": [
+      "Feather pillows",
+      "Quiet room"
+    ]
+  }
+]
