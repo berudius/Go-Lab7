@@ -1,0 +1,24 @@
+[
+  {
+    "ID": "2cbebb0f-5717-4ec7-be78-cbf89a078d14",
+    "RoomType": "Standart",
+    "Price": 80,
+    "Facilities": [
+      "Ocean View",
+      "King Bed",
+      "Jacuzzi"
+    ]
+  },
+  {
+    "ID": "2d12b49e-d462-4a8c-98fe-c1bcac04d652",
+    "RoomType": "Econom",
+    "Price": 60,
+    "Facilities": []
+  },
+  {
+    "ID": "eecf095b-e4c3-4142-9f0c-14309f5e86b7",
+    "RoomType": "Econom",
+    "Price": 110,
+    "Facilities": []
+  }
+]
