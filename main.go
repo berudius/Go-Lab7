@@ -1,15 +1,19 @@
 package main
 
 import (
+	"log"
+	"net/http"
+
 	"go.mod/handlers"
+	"go.mod/middlewares"
 	"go.mod/repositories"
 	"go.mod/services"
-	"github.com/gin-gonic/gin"
-	"log"
 )
 
 func main() {
+
 	repositories.InitDB()
+
 
 	hotelRepo := repositories.NewHotelRepository(repositories.DB)
 	hotelService := services.NewHotelService(hotelRepo)
@@ -27,45 +31,27 @@ func main() {
 	bookingService := services.NewBookingService(bookingRepo)
 	bookingHandler := handlers.NewBookingHandler(bookingService)
 
-	r := gin.Default()
 
-	hotelRoutes := r.Group("/hotels")
-	{
-		hotelRoutes.GET("/", hotelHandler.GetAll)
-		hotelRoutes.GET("/:id", hotelHandler.GetByID)
-		hotelRoutes.POST("/", hotelHandler.Create)
-		hotelRoutes.PUT("/:id", hotelHandler.Update)
-		hotelRoutes.DELETE("/:id", hotelHandler.Delete)
-	}
+	http.Handle("/hotels", route(hotelHandler))
+	http.Handle("/hotels/", route(hotelHandler))
 
-	roomRoutes := r.Group("/rooms")
-	{
-		roomRoutes.GET("/", roomHandler.GetAll)
-		roomRoutes.GET("/:id", roomHandler.GetByID)
-		roomRoutes.POST("/", roomHandler.Create)
-		roomRoutes.PUT("/:id", roomHandler.Update)
-		roomRoutes.DELETE("/:id", roomHandler.Delete)
-	}
+	http.Handle("/rooms", route(roomHandler))
+	http.Handle("/rooms/", route(roomHandler))
 
-	guestRoutes := r.Group("/guests")
-	{
-		guestRoutes.GET("/", guestHandler.GetAll)
-		guestRoutes.GET("/:id", guestHandler.GetByID)
-		guestRoutes.POST("/", guestHandler.Create)
-		guestRoutes.PUT("/:id", guestHandler.Update)
-		guestRoutes.DELETE("/:id", guestHandler.Delete)
-	}
+	http.Handle("/guests", route(guestHandler))
+	http.Handle("/guests/", route(guestHandler))
 
-	bookingRoutes := r.Group("/bookings")
-	{
-		bookingRoutes.GET("/", bookingHandler.GetAll)
-		bookingRoutes.GET("/:id", bookingHandler.GetByID)
-		bookingRoutes.POST("/", bookingHandler.Create)
-		bookingRoutes.PUT("/:id", bookingHandler.Update)
-		bookingRoutes.DELETE("/:id", bookingHandler.Delete)
-	}
+	http.Handle("/bookings", route(bookingHandler))
+	http.Handle("/bookings/", route(bookingHandler))
 
-	if err := r.Run(":8080"); err != nil {
-		log.Fatalf("Failed to run server: %v", err)
-	}
+
+	port := ":8080"
+	log.Printf("Сервер REST API запущено на http://localhost%s", port)
+	log.Fatal(http.ListenAndServe(port, nil))
+}
+
+func route(h http.Handler) http.Handler {
+	return middlewares.LoggingMiddleware(
+		middlewares.AuthMiddleware(h),
+	)
 }
