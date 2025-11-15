@@ -1,37 +1,33 @@
 package models
 
-type Saveable interface {
-	Pass()
-}
+import "gorm.io/gorm"
 
 type Hotel struct {
-	ID    string
-	Name  string
-	Rooms []Room
+	gorm.Model
+	Name  string `gorm:"unique;not null"`
+	Rooms []Room `gorm:"foreignKey:HotelID"`
 }
 
 type Room struct {
-	ID         string
-	RoomType   string
-	Price      float32
-	Facilities []string
+	gorm.Model
+	RoomType   string   `gorm:"not null"`
+	Price      float32  `gorm:"not null"`
+	Facilities []string `gorm:"-"`
+	HotelID    uint
 }
 
 type Guest struct {
-	ID           string
-	Name         string
-	MobileNumber string
-	Preferences  []string
+	gorm.Model
+	Name         string   `gorm:"not null"`
+	MobileNumber string   `gorm:"unique;not null"`
+	Preferences  []string `gorm:"-"`
 }
 
 type Booking struct {
-	ID          string
-	Guest       Guest
-	Hotel       Hotel
-	BookedRooms []Room
+	gorm.Model
+	GuestID     uint
+	HotelID     uint
+	Guest       Guest `gorm:"foreignKey:GuestID"`
+	Hotel       Hotel `gorm:"foreignKey:HotelID"`
+	BookedRooms []Room `gorm:"many2many:booking_rooms;"`
 }
-
-func (h Hotel) Pass()   {}
-func (r Room) Pass()    {}
-func (g Guest) Pass()   {}
-func (b Booking) Pass() {}
