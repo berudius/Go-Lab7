@@ -10,17 +10,17 @@ type Hotel struct {
 
 type Room struct {
 	gorm.Model
-	RoomType   string   `gorm:"not null"`
-	Price      float32  `gorm:"not null"`
-	Facilities []string `gorm:"-"`
+	RoomType   string      `gorm:"not null"`
+	Price      float32     `gorm:"not null"`
+	Facilities StringSlice `gorm:"type:json"`
 	HotelID    uint
 }
 
 type Guest struct {
 	gorm.Model
-	Name         string   `gorm:"not null"`
-	MobileNumber string   `gorm:"unique;not null"`
-	Preferences  []string `gorm:"-"`
+	Name         string      `gorm:"not null"`
+	MobileNumber string      `gorm:"unique;not null"`
+	Preferences  StringSlice `gorm:"type:json"`
 }
 
 type Booking struct {
